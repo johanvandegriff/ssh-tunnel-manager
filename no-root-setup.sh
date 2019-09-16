@@ -1,6 +1,7 @@
 #!/bin/bash
 
 . `dirname "$0"`/install-common.sh || exit 1
+PARENT_DIR="$(cd "$(dirname "$0")"; pwd -P)"
 
 DEFAULT_REMOTE_SSH_PORT=22
 DEFAULT_REMOTE_USER=fwd
@@ -92,8 +93,8 @@ else
 fi
 
 
-mkdir -p "`dirname $0`/configs"
-CONNECT_CONFIG="`dirname $0`/configs/$REMOTE_USER@$REMOTE_SERVER:$REMOTE_SSH_FWD_PORT"
+mkdir -p "$PARENT_DIR/configs"
+CONNECT_CONFIG="$PARENT_DIR/configs/$REMOTE_USER@$REMOTE_SERVER:$REMOTE_SSH_FWD_PORT"
 
 echo "REMOTE_SERVER=$REMOTE_SERVER
 REMOTE_SSH_PORT=$REMOTE_SSH_PORT
@@ -102,7 +103,7 @@ SSH_KEY_NAME=$SSH_KEY_NAME
 LOCAL_SSH_PORT=$LOCAL_SSH_PORT
 REMOTE_SSH_FWD_PORT=$REMOTE_SSH_FWD_PORT" > $CONNECT_CONFIG
 
-CONNECT_SCRIPT="`dirname $0`/remote-tunnel.sh $CONNECT_CONFIG"
+CONNECT_SCRIPT="$PARENT_DIR/remote-tunnel.sh $CONNECT_CONFIG"
 
 color green "Adding connection script to local crontab..."
 CRON_JOB="*/5 * * * * $CONNECT_SCRIPT"
