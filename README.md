@@ -13,16 +13,22 @@ I'm not responsible for any damage caused as a result of you using this script. 
 ## Steps
 All these commands are run on the computer you want to access.
 
+### Set Up the SSH Server
+1. `sudo apt install openssh-server`
+2. `sudo systemctl enable sshd`
+3. `sudo systemctl start sshd`
+
+### Download the Script
 1. `git clone https://gitlab.com/johanvandegriff/ssh-tunnel-manager.git`
 2. `cd ssh-tunnel-manager`
-3. `sudo systemctl enable sshd`
-3. `sudo systemctl start sshd`
+
 ### If you do NOT have root access on the remote server...
 This option will use an existing user on the remote server to set up the forwarding. It will also work if you do have root access, but make sure not to use the root account for the forwarding -- create a separate account to use for forwarding only.
 
 1. `./no-root-setup.sh`
 2. The script will ask you for some config options. If your remote user is `johndoe@example.com`, you should enter `example.com` when it asks for the URL or IP, and `johndoe` when it asks for the account. If you don't know what SSH port to use, it is probably `22`.
 3. At the end, the script will output the command to use to access the computer remotely. e.g. `ssh -t fwd@example.com ssh johndoe-laptop`. Try typing this command into another computer. It will ask you for 2 passwords, first for the remote server, then for the computer.
+
 ### If you DO have root access on the remote server...
 This option will create a new user on the remote server and use that user to forward the local ssh port to a remote port that is exposed to the outside.
 
