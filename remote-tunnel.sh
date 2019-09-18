@@ -34,8 +34,8 @@ fi
 pgrep -f -x "$COMMAND" > /dev/null 2>&1 || $COMMAND
 
 # 2. Test tunnel by looking at "netstat" output on $REMOTE_SERVER
-ssh -p $REMOTE_SSH_PORT $REMOTE_USER@$REMOTE_SERVER netstat -an | egrep "tcp.*:$REMOTE_SSH_FWD_PORT.*LISTEN" \
-   > /dev/null 2>&1
+#ssh -p $REMOTE_SSH_PORT $REMOTE_USER@$REMOTE_SERVER netstat -an | egrep "tcp.*:$REMOTE_SSH_FWD_PORT.*LISTEN" > /dev/null 2>&1
+ssh -p $REMOTE_SSH_PORT $REMOTE_USER@$REMOTE_SERVER nc -vz localhost $REMOTE_SSH_FWD_PORT > /dev/null 2>&1
 if [ $? -ne 0 ] ; then
    pkill -f -x "$COMMAND"
    $COMMAND
