@@ -34,7 +34,7 @@ This option will create a new user on the remote server and use that user to for
 
 1. `./setup.sh`
 2. The script will ask you for some config options. If your remote user is `root@example.com`, you should enter `example.com` when it asks for the URL or IP, and `root` when it asks for the admin account. Then you can specify a new user to be created for the forwarding (the default of `fwd` is fine). If you don't know what SSH port to use, it is probably `22`.
-3. At the end, the script will output the command to use to access the computer remotely. e.g. `ssh -p 28401 johanv@johanv.xyz`. Try typing this command into another computer. It will only ask you for 1 password, the one for your computer (not the remote server).
+3. At the end, the script will output the command to use to access the computer remotely. e.g. `ssh -p 28401 user@example.com`. Try typing this command into another computer. It will only ask you for 1 password, the one for your computer (not the remote server).
 
 # Uninstall
 ## Locally

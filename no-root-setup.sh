@@ -108,7 +108,7 @@ CONNECT_SCRIPT="$PARENT_DIR/remote-tunnel.sh $CONNECT_CONFIG"
 color green "Adding connection script to local crontab..."
 CRON_JOB="*/5 * * * * $CONNECT_SCRIPT"
 cron_temp_file=$(mktemp)
-crontab -l > "$cron_temp_file" || error "Error retrieving crontab!"
+crontab -l > "$cron_temp_file" || warning "Error retrieving crontab, probably empty."
 if grep -Fx "$CRON_JOB" "$cron_temp_file"; then
   color green "Cron job already installed."
 else
